@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>קביעת תורים — The Blade & Bourbon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Branding Colors: Crimson Red / Industrial Look */
+            --color-primary: #DC143C; /* Crimson Red */
+            --color-primary-hover: #b0102e;
+            
+            /* Dark Theme Variables (Charcoal & Graphite) */
+            --dark-bg: #121212;
+            --dark-card: #202020;
+            --dark-text: #F0F0F0;
+            --dark-input-bg: #1A1A1A;
+            --dark-border: #3A3A3A;
+            --dark-hover-bg: #2D2D2D;
+
+            /* Light Theme Variables */
+            --light-bg: #F5F5F5;
+            --light-card: #FFFFFF;
+            --light-text: #333333;
+            --light-input-bg: #FFFFFF;
+            --light-border: #E0E0E0;
+            --light-hover-bg: #E8E8E8;
+        }
+
+        body {
+            /* גוף הטקסט - Rubik */
+            font-family: 'Rubik', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+             /* כותרות - Bebas Neue */
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+
+        /* Default Dark Theme Classes */
+        .dark {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        .dark .card {
+            background-color: var(--dark-card);
+            border-top-color: var(--color-primary); /* Red Line on top */
+        }
+        .dark input, .dark select, .dark textarea {
+            background-color: var(--dark-input-bg);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        .dark input:focus, .dark select:focus, .dark textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 1px var(--color-primary);
+        }
+        .dark .appt {
+            /* Appointment Card */
+            background-color: var(--dark-input-bg);
+            border: 1px solid var(--dark-border); 
+        }
+        .dark .appt:hover {
+            background-color: var(--dark-hover-bg);
+        }
+        .dark .log-button {
+            color: var(--color-primary);
+            background-color: var(--dark-input-bg);
+            border-color: var(--color-primary);
+        }
+        .dark .log-button:hover {
+            background-color: var(--color-primary);
+            color: var(--dark-bg);
+        }
+
+
+        /* Light Theme Classes */
+        .light {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+        .light .card {
+            background-color: var(--light-card);
+            border-top-color: var(--color-primary);
+        }
+        .light input, .light select, .light textarea {
+            background-color: var(--light-input-bg);
+            border-color: var(--light-border);
+            color: var(--light-text);
+        }
+        .light input:focus, .light select:focus, .light textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 1px var(--color-primary);
+        }
+        .light .appt {
+            background-color: var(--light-input-bg);
+            border: 1px solid var(--light-border); 
+        }
+        .light .appt:hover {
+            background-color: var(--light-hover-bg);
+        }
+        .light .log-button {
+            color: var(--color-primary);
+            background-color: var(--light-input-bg);
+            border-color: var(--color-primary);
+        }
+        .light .log-button:hover {
+            background-color: var(--color-primary);
+            color: var(--light-card);
+        }
+
+
+        /* Notice Styles */
+        .notice.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            /* Override dark/light text color for notice */
+            --tw-text-opacity: 1; 
+            color: #155724;
+        }
+        .notice.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            /* Override dark/light text color for notice */
+            --tw-text-opacity: 1; 
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body class="dark" id="body-theme">
+
+    <div class="card max-w-lg mx-auto p-6 md:p-8 rounded-xl shadow-2xl mt-10 transition-colors duration-300 border-t-4">
+        
+        <header class="flex justify-between items-center mb-6 border-b pb-4" style="border-bottom-color: var(--dark-border);">
+            <h1 class="text-3xl font-extrabold text-center" style="color: var(--color-primary);">
+                קביעת תור
+            </h1>
+            <button id="theme-toggle" class="p-2 rounded-full transition-colors duration-300" onclick="toggleTheme()" style="background-color: var(--color-primary-hover);">
+                <svg id="sun-icon" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg id="moon-icon" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </header>
+
+        <p class="text-sm mb-6 opacity-75">אנא מלא/י את הפרטים ובחר/י תאריך ושעה רצויים. הדיוק מתחיל כאן.</p>
+
+        <div id="notice" class="mb-4"></div>
+
+        <div class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-semibold mb-1">שם מלא</label>
+                <input id="name" placeholder="שם מלא" autocomplete="name" class="w-full p-3 rounded-md border focus:outline-none transition duration-200">
+            </div>
+
+            <div>
+                <label for="contact" class="block text-sm font-semibold mb-1">טלפון או אימייל</label>
+                <input id="contact" placeholder="050-1234567 או you@example.com" autocomplete="tel" class="w-full p-3 rounded-md border focus:outline-none transition duration-200">
+            </div>
+
+            <div>
+                <label for="item" class="block text-sm font-semibold mb-1">סוג תור</label>
+                <select id="item" class="w-full p-3 rounded-md border focus:outline-none transition duration-200">
+                    <option value="consult">תספורת לגברים - The Fade (45 דק')</option>
+                    <option value="beard">עיצוב זקן - The Razor Edge (30 דק')</option>
+                    <option value="full_service">חבילת פרימיום - The Full Package (60 דק')</option>
+                </select>
+            </div>
+
+            <div class="flex gap-4">
+                <div class="flex-1">
+                    <label for="date" class="block text-sm font-semibold mb-1">תאריך</label>
+                    <input id="date" type="date" class="w-full p-3 rounded-md border focus:outline-none transition duration-200">
+                </div>
+                <div class="flex-1">
+                    <label for="time" class="block text-sm font-semibold mb-1">שעה</label>
+                    <input id="time" type="time" class="w-full p-3 rounded-md border focus:outline-none transition duration-200">
+                </div>
+            </div>
+
+            <div>
+                <label for="notes" class="block text-sm font-semibold mb-1">הערות (אופציונלי)</label>
+                <textarea id="notes" rows="2" placeholder="הערות — לדוגמה: סוג תספורת מועדף, שימוש במכונה, ועוד..." class="w-full p-3 rounded-md border focus:outline-none transition duration-200"></textarea>
+            </div>
+        </div>
+
+        <button class="w-full mt-6 py-3 rounded-md font-bold transition duration-300 transform hover:scale-[1.01] shadow-lg"
+                onclick="book()" style="background-color: var(--color-primary); color: var(--dark-bg);">
+            קבע תור עכשיו
+        </button>
+
+        <section class="mt-8 pt-6 border-t" style="border-top-color: var(--dark-border);">
+            <h3 class="text-xl font-bold mb-3" style="color: var(--color-primary-hover);">תורים מתוזמנים</h3>
+            <button class="log-button px-4 py-2 rounded-md font-semibold transition duration-200 border-2"
+                    onclick="viewAllLogs()">
+                צפייה ביומן מלא (לספר)
+            </button>
+            <div id="listArea" class="mt-4 space-y-3"></div>
+            <p class="text-xs mt-4 opacity-50">המידע נשמר מקומית בדפדפן, לצרכי הדגמה בלבד.</p>
+        </section>
+        
+        <a href="index1.html" class="block mt-6 text-center text-sm hover:underline" style="color: var(--color-primary-hover);">
+            &larr; חזרה לעמוד הראשי (The Blade & Bourbon)
+        </a>
+    </div>
+
+    <script>
+        // --- Theme Toggle Script (Preserved Functionality) ---
+        const body = document.getElementById('body-theme');
+        const toggleButton = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function toggleTheme() {
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+            toggleButton.style.backgroundColor = body.classList.contains('dark') ? 'var(--color-primary-hover)' : 'var(--color-primary)';
+            // Re-render to update dynamic button colors
+            render();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                body.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+            toggleButton.style.backgroundColor = body.classList.contains('dark') ? 'var(--color-primary-hover)' : 'var(--color-primary)';
+            render(); 
+        });
+        
+        // --- Appointment Logic ---
+        const STORAGE = 'barber_bookings_v2';
+        const BARBER_CODE = '1234'; 
+        
+        const DURATION = {
+            beard: 30, // עיצוב זקן
+            consult: 45, // תספורת לגברים
+            full_service: 60 // חבילת פרימיום (שינוי זמן ל-60 דק' בהתאם ללוגיקת הקוד)
+        };
+
+        function displayItem(id){
+            const map = {
+                beard:'עיצוב זקן',
+                consult:'תספורת לגברים',
+                full_service:'תספורת + זקן',
+            };
+            return map[id] || id;
+        }
+        
+        function load() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE) || '[]').map(a=>{
+                    // Convert ISO string back to Date object
+                    a.startsAt = new Date(a.startsAt);
+                    return a;
+                });
+            } catch(e){
+                console.error("Error loading appointments:", e);
+                return [];
+            }
+        }
+
+        function save(list) {
+            // Convert Date object to ISO string for storage
+            const serial = list.map(a => ({ ...a, startsAt: a.startsAt.toISOString() }));
+            localStorage.setItem(STORAGE, JSON.stringify(serial));
+        }
+
+        function showNotice(type, text) {
+            const n = document.getElementById('notice');
+            // Ensure notice text is secure
+            n.innerHTML = `<div class="notice ${type} p-3 rounded-md font-semibold">${text}</div>`;
+        }
+        
+        function combineDateTime(date, time) {
+            if (!date || !time) return null;
+            // Use local format for New Date to avoid timezone issues when checking future dates
+            return new Date(`${date}T${time}:00`);
+        }
+
+        function isOverlap(newAppt, existingAppt) {
+            const startA = newAppt.startsAt.getTime();
+            const endA = startA + DURATION[newAppt.item] * 60000;
+            
+            const startB = existingAppt.startsAt.getTime();
+            const endB = startB + DURATION[existingAppt.item] * 60000;
+
+            // Check for overlap: startA is before endB AND endA is after startB
+            return (startA < endB && endA > startB);
+        }
+
+        function formatDateTime(date) {
+            // Using 'he-IL' for Hebrew/Israeli formatting
+            const d = date.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric', year: 'numeric' });
+            const t = date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+            return { date: d, time: t };
+        }
+        
+        function escapeHtml(unsafe) {
+            // Basic HTML escaping for user-supplied data
+            return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+        
+        function render() {
+            // Filter out canceled appointments and sort by time
+            const list = load().filter(a => !a.canceled).sort((a, b) => a.startsAt - b.startsAt);
+            const listArea = document.getElementById('listArea');
+            listArea.innerHTML = '';
+            
+            if (list.length === 0) {
+                listArea.innerHTML = '<p class="text-sm opacity-60 mt-4">אין תורים מתוזמנים (שלא בוטלו) כרגע.</p>';
+                return;
+            }
+
+            const now = new Date();
+            
+            list.forEach((appt, index) => {
+                const { date, time } = formatDateTime(appt.startsAt);
+                const itemDuration = DURATION[appt.item] || 0;
+                // Add duration to check if appointment is in the past
+                const endTime = new Date(appt.startsAt.getTime() + itemDuration * 60000);
+                const isPast = endTime < now;
+                const statusClass = isPast ? 'opacity-50 line-through' : '';
+                const itemDisplay = displayItem(appt.item);
+                
+                // Determine button style dynamically based on current theme
+                const buttonBg = body.classList.contains('dark') ? 'var(--dark-input-bg)' : 'var(--light-hover-bg)';
+                const buttonColor = body.classList.contains('dark') ? 'var(--dark-text)' : 'var(--light-text)';
+                const buttonBorder = body.classList.contains('dark') ? 'var(--dark-border)' : 'var(--light-border)';
+                
+                const apptHtml = `
+                    <div class="appt p-4 rounded-md flex justify-between items-center ${statusClass} shadow-md transition-shadow">
+                        <div>
+                            <div class="font-bold text-lg">${escapeHtml(appt.name)} (${itemDisplay})</div>
+                            <div class="meta text-sm opacity-75 mt-1">
+                                <span>${date}</span> בשעה <span>${time}</span> (${itemDuration} דק')
+                            </div>
+                            <div class="text-xs mt-1 opacity-50">UID: ${appt.id}</div>
+                            <small class="block text-xs mt-1 italic">${escapeHtml(appt.notes || 'אין הערות.')}</small>
+                        </div>
+                        <div>
+                            ${!isPast ? `<button class="text-xs px-3 py-1 rounded-md transition duration-200 hover:opacity-80 border"
+                                style="background-color: ${buttonBg}; color: ${buttonColor}; border-color: ${buttonBorder};"
+                                onclick="cancel(${appt.id}, event)">בטל</button>` :
+                                `<span class="text-sm text-gray-500">הסתיים</span>`}
+                        </div>
+                    </div>
+                `;
+                listArea.innerHTML += apptHtml;
+            });
+        }
+        
+        function book() {
+            document.getElementById('notice').innerHTML = '';
+            
+            const name = document.getElementById('name').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            const item = document.getElementById('item').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const notes = document.getElementById('notes').value.trim();
+
+            if (!name || !contact || !date || !time) {
+                return showNotice('error', 'אנא מלא/י את כל השדות הנדרשים (שם, קשר, תאריך ושעה).');
+            }
+
+            const startsAt = combineDateTime(date, time);
+            if (!startsAt || startsAt < new Date()) {
+                return showNotice('error', 'התאריך והשעה שנבחרו אינם חוקיים או נמצאים בעבר.');
+            }
+            
+            if (!DURATION[item]) {
+                return showNotice('error', 'סוג התור אינו חוקי.');
+            }
+
+            const newAppt = { id: Date.now(), name, contact, item, startsAt, notes, canceled: false };
+            const existing = load().filter(a => !a.canceled); // Check against active appointments
+
+            const overlap = existing.find(a => isOverlap(newAppt, a));
+            
+            if (overlap) {
+                const { date: overlapDate, time: overlapTime } = formatDateTime(overlap.startsAt);
+                return showNotice('error', `חפיפה בתורים: התור שבחרת מתנגש עם תור קיים ב-${overlapDate} בשעה ${overlapTime}. (${DURATION[overlap.item]} דק')`);
+            }
+
+            // Load full list (including canceled) to prevent overwriting
+            const fullList = load();
+            fullList.push(newAppt);
+            save(fullList);
+            
+            showNotice('success', `תור נקבע בהצלחה! ${displayItem(item)} ב-${formatDateTime(startsAt).date} בשעה ${formatDateTime(startsAt).time}.`);
+            
+            // Clear inputs after successful booking
+            document.getElementById('name').value = '';
+            document.getElementById('contact').value = '';
+            document.getElementById('notes').value = '';
+            
+            render();
+        }
+
+        function cancel(id, event) {
+            if (event) event.stopPropagation();
+            
+            const list = load();
+            const index = list.findIndex(a => a.id === id);
+
+            if (index === -1 || list[index].canceled) return;
+            
+            const appt = list[index];
+            const { date, time } = formatDateTime(appt.startsAt);
+            
+            const confirmation = window.prompt(`האם אתה בטוח/ה שברצונך לבטל את התור של ${appt.name} ב-${date} בשעה ${time}? (הקלד 'בטל' כדי לאשר)`);
+            
+            if (confirmation === 'בטל') {
+                // Instead of splice, mark as canceled to keep record (optional, but better for logging)
+                list.splice(index, 1); // Simpler deletion for this demo
+                save(list);
+                showNotice('success', `התור בוטל בהצלחה.`);
+                render();
+            }
+        }
+        
+        function viewAllLogs() {
+            const codeAttempt = window.prompt("הזן/י את קוד הספר כדי לצפות ביומן המלא:");
+            
+            if (codeAttempt !== BARBER_CODE) {
+                showNotice('error', 'קוד ספר שגוי. הגישה נדחתה.');
+                return;
+            }
+
+            // Load ALL records, including future, past and potentially cancelled (though in this version they are deleted)
+            const list = load().sort((a, b) => a.startsAt - b.startsAt);
+            const listArea = document.getElementById('listArea');
+            
+            let logsHtml = list.map(a => {
+                const { date, time } = formatDateTime(a.startsAt);
+                const itemDuration = DURATION[a.item] || 0;
+                
+                let status = 'פעיל';
+                let statusColor = 'var(--color-primary)';
+                
+                // If using the deletion method in cancel(), a.canceled will always be false for loaded items.
+                const endTime = new Date(a.startsAt.getTime() + itemDuration * 60000);
+
+                if (a.canceled) {
+                    status = 'בוטל';
+                    statusColor = '#DC3545';
+                } else if (endTime < new Date()) {
+                    status = 'הסתיים';
+                    statusColor = 'var(--dark-secondary-text)';
+                }
+
+                const notes = a.notes ? ` - הערות: ${escapeHtml(a.notes)}` : '';
+                
+                // Use list-style display for clarity in the log view
+                return `<p class="text-sm border-b py-2 opacity-75" style="border-bottom-color: var(--dark-border);">
+                    <strong style="color: ${statusColor};">${displayItem(a.item)} (${itemDuration} דק')</strong> ל- <strong>${escapeHtml(a.name)}</strong> | קשר: ${escapeHtml(a.contact)} | ${date} ${time} | סטטוס: <span style="color: ${statusColor};">${status}</span> ${notes}
+                </p>`;
+            }).join('');
+
+            const buttonBg = body.classList.contains('dark') ? 'var(--dark-input-bg)' : 'var(--light-hover-bg)';
+            const buttonColor = body.classList.contains('dark') ? 'var(--dark-text)' : 'var(--light-text)';
+            const buttonBorder = body.classList.contains('dark') ? 'var(--dark-border)' : 'var(--light-border)';
+
+            listArea.innerHTML = `<h3 class="text-xl font-bold mb-3" style="color: var(--color-primary);">יומן תורים מלא (${list.length} תורים)</h3>${logsHtml}<button class="mt-4 px-4 py-2 rounded-md font-semibold transition duration-200 border-2" style="background-color: ${buttonBg}; color: ${buttonColor}; border-color: ${buttonBorder};" onclick="render()">חזור לרשימה</button>`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', render);
+
+    </script>
+</body>
+</html>

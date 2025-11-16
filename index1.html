@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Blade & Bourbon - סטודיו גרומינג אקסקלוסיבי</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Branding Colors: Crimson Red / Industrial Look */
+            --color-primary: #DC143C; /* Crimson Red */
+            --color-primary-hover: #b0102e;
+            /* Dark Theme (Charcoal & Graphite) */
+            --dark-bg: #121212;
+            --dark-card: #202020;
+            --dark-text: #F0F0F0;
+            --dark-secondary-text: #A0A0A0;
+            /* Light Theme (Kept functional but less relevant for this aesthetic) */
+            --light-bg: #F0F0F0;
+            --light-card: #FFFFFF;
+            --light-text: #121212;
+            --light-secondary-text: #555555;
+        }
+
+        body {
+            /* גוף הטקסט - Rubik */
+            font-family: 'Rubik', sans-serif;
+            transition: background-color 0.4s, color 0.4s;
+            scroll-behavior: smooth;
+        }
+        
+        /* כותרות - Bebas Neue */
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.15em; /* Wide spacing for intensity */
+            text-transform: uppercase;
+        }
+
+        /* Default to Dark Theme */
+        .dark {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        .dark .card {
+            background-color: var(--dark-card);
+            color: var(--dark-text);
+            border-left: 3px solid var(--color-primary); /* Industrial accent */
+        }
+        .dark h2 {
+             color: var(--dark-text); 
+        }
+        .dark .accent-text {
+            color: var(--color-primary);
+        }
+        .dark .text-secondary {
+            color: var(--dark-secondary-text);
+        }
+        
+        /* Hero Section Styling (Dramatic) */
+        .hero-bg {
+            background-image: url('https://picsum.photos/id/350/1600/1000'); /* Barber shop interior - dark, moody, industrial */
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        .hero-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* Strong overlay */
+        }
+        .hero-bg > * {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Service Cards - Hover Effect */
+        .service-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .service-card:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 15px 25px rgba(220, 20, 60, 0.2); /* Red glow */
+        }
+
+        /* Advanced: Scroll Fade-In Animation (Often used by advanced dev) */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .scroll-animate {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="dark" id="body-theme">
+
+    <header class="sticky top-0 z-50 shadow-xl" style="background-color: var(--dark-card);">
+        <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+            <h1 class="text-4xl font-extrabold" style="color: var(--color-primary);">THE BLADE</h1>
+            <nav class="hidden md:flex space-x-12">
+                <a href="#services" class="text-xl hover:text-white transition duration-300 text-secondary">שירותים</a>
+                <a href="#studio" class="text-xl hover:text-white transition duration-300 text-secondary">הסטודיו</a>
+                <a href="#contact" class="text-xl hover:text-white transition duration-300 text-secondary">קשר</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full transition-colors duration-300" onclick="toggleTheme()" style="background-color: var(--color-primary-hover);">
+                    <svg id="sun-icon" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg id="moon-icon" class="w-6 h-6 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+                <a href="appoinments.html" 
+                    class="px-5 py-2 rounded-md font-bold transition duration-300 transform hover:scale-105" 
+                    style="background-color: var(--color-primary); color: var(--dark-bg);">
+                    קבע תור
+                </a>
+            </div>
+        </div>
+        <nav class="md:hidden flex justify-around p-3 border-t" style="border-color: var(--color-primary-hover);">
+            <a href="#services" class="text-base font-semibold transition duration-300 text-secondary">שירותים</a>
+            <a href="#studio" class="text-base font-semibold transition duration-300 text-secondary">סטודיו</a>
+            <a href="#contact" class="text-base font-semibold transition duration-300 text-secondary">קשר</a>
+        </nav>
+    </header>
+
+    <div class="hero-bg h-[80vh] flex items-center justify-center text-center">
+        <div class="p-4">
+            <h2 class="text-7xl md:text-[10rem] font-black text-white leading-none tracking-widest relative">
+                <span class="block mb-2 md:mb-4 text-5xl md:text-6xl text-center" style="color: var(--color-primary);">A.Style</span>
+                HairCuts
+                <span class="absolute right-0 left-0 mx-auto w-1/2 h-1 block mt-2 md:mt-4" style="background-color: var(--color-primary);"></span>
+            </h2>
+            <p class="text-xl md:text-3xl text-white font-light mt-8">
+                דיוק ללא פשרות. תספורת של אלפיון.
+            </p>
+        </div>
+    </div>
+
+    <section id="services" class="py-24 px-4 max-w-7xl mx-auto">
+        <h2 class="text-5xl md:text-7xl font-bold text-center mb-16">
+            <span class="accent-text">מחירון</span> הטיפולים
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="card service-card p-6 md:p-10 rounded-md scroll-animate" style="animation-delay: 0s;">
+                <h3 class="text-3xl font-bold mb-3 accent-text">תספורת גברים</h3>
+                <p class="text-lg text-secondary mb-4">תספורת גברים מלאה: פייד מדויק, ניקוי, ושטיפה.</p>
+                <div class="flex justify-between items-center pt-4 border-t" style="border-color: var(--dark-secondary-text);">
+                    <p class="text-5xl font-extrabold">80₪</p>
+                    <span class="text-sm text-secondary">~ 45 דק'</span>
+                </div>
+            </div>
+
+            <div class="card service-card p-6 md:p-10 rounded-md scroll-animate" style="animation-delay: 0.2s;">
+                <h3 class="text-3xl font-bold mb-3 accent-text">עיצוב וסידור זקן</h3>
+                <p class="text-lg text-secondary mb-4">עיצוב ודיוק זקן עם סכין חמה, שמן הזנה ופיניש.</p>
+                <div class="flex justify-between items-center pt-4 border-t" style="border-color: var(--dark-secondary-text);">
+                    <p class="text-5xl font-extrabold">60₪</p>
+                    <span class="text-sm text-secondary">~ 30 דק'</span>
+                </div>
+            </div>
+
+            <div class="card service-card p-6 md:p-10 rounded-md scroll-animate" style="animation-delay: 0.4s;">
+                <h3 class="text-3xl font-bold mb-3 accent-text">עיצוב וסידור זקן+תספורת גברים</h3>
+                <p class="text-lg text-secondary mb-4">תספורת (Fade) + עיצוב זקן מלא (Razor Edge).</p>
+                <div class="flex justify-between items-center pt-4 border-t" style="border-color: var(--dark-secondary-text);">
+                    <p class="text-5xl font-extrabold">130₪</p>
+                    <span class="text-sm text-secondary">~ 75 דק'</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-16">
+             <a href="appoinments.html" 
+                class="inline-block px-10 py-4 text-xl rounded-md font-bold transition duration-300 hover:opacity-90 shadow-lg" 
+                style="background-color: var(--color-primary); color: var(--dark-bg);">
+                להזמנת הטיפול שלך
+             </a>
+        </div>
+    </section>
+
+    <section id="studio" class="py-24 px-4 max-w-4xl mx-auto border-t" style="border-color: var(--dark-card);">
+        <h2 class="text-5xl md:text-7xl font-bold text-center mb-16">
+            <span class="accent-text">הסטודיו</span> שלנו
+        </h2>
+        
+        <div class="relative">
+            <div class="absolute right-1/2 w-0.5 h-full transform translate-x-1/2 hidden md:block" style="background-color: var(--color-primary);"></div>
+
+            <div class="flex justify-start md:justify-end md:rtl:text-right mb-12 w-full md:w-1/2 rtl:mr-auto scroll-animate" style="animation-delay: 0.6s;">
+                <div class="card p-6 rounded-md shadow-xl border-l-0 border-r-4 md:border-r-0 md:border-l-4 rtl:border-r-4 rtl:md:border-l-0 rtl:md:border-r-4" style="border-color: var(--color-primary);">
+                    <h3 class="text-2xl font-bold accent-text">2020: ההקמה</h3>
+                    <p class="text-base text-secondary mt-2">פותחים את הדלתות לראשונה. התחייבות לדיוק ולחווית לקוח אינטימית ואקסקלוסיבית.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-start md:justify-start mb-12 w-full md:w-1/2 rtl:ml-auto scroll-animate" style="animation-delay: 0.8s;">
+                <div class="card p-6 rounded-md shadow-xl border-l-0 border-r-4 md:border-r-4 md:border-l-0 rtl:border-r-4 rtl:md:border-r-4 rtl:md:border-l-0" style="border-color: var(--color-primary);">
+                    <h3 class="text-2xl font-bold accent-text">חומרי גלם</h3>
+                    <p class="text-base text-secondary mt-2">מעבר מלא למוצרי גרומינג פרימיום מאירופה בלבד. רק הטוב ביותר נוגע בשיער שלנו.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-start md:justify-end md:rtl:text-right mb-12 w-full md:w-1/2 rtl:mr-auto scroll-animate" style="animation-delay: 1.0s;">
+                <div class="card p-6 rounded-md shadow-xl border-l-0 border-r-4 md:border-r-0 md:border-l-4 rtl:border-r-4 rtl:md:border-l-0 rtl:md:border-r-4" style="border-color: var(--color-primary);">
+                    <h3 class="text-2xl font-bold accent-text">השראה</h3>
+                    <p class="text-base text-secondary mt-2">כל ספר אצלנו עובר הכשרות רבעוניות על טרנדים מברבריה אירופאית וניו יורק.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-4 text-center border-t" style="border-color: var(--dark-card);">
+        <h2 class="text-5xl md:text-7xl font-bold mb-8">
+            <span class="accent-text">THE CONTACT</span>
+        </h2>
+        <p class="text-xl md:text-2xl font-medium text-secondary mb-12">
+            התספרות מחכה לכם. נשמח לשמוע מכם.
+        </p>
+        <div class="space-y-4 text-xl md:text-2xl font-medium text-secondary mb-12">
+            <p>📞 שיחת יוקרה: <strong class="accent-text">050-000-0000</strong></p>
+            <p>📍 הסטודיו: <strong class="accent-text">מקום כל שהוא </strong></p>
+        </div>
+        
+        <a href="appoinments.html" 
+            class="inline-block px-12 py-5 text-2xl rounded-md font-bold transition duration-300 shadow-2xl hover:opacity-90 transform hover:scale-[1.05]" 
+            style="background-color: var(--color-primary); color: var(--dark-bg); box-shadow: 0 5px 20px rgba(220, 20, 60, 0.5);">
+            לקביעת תור (חובה)
+        </a>
+    </section>
+
+    <footer class="p-6 text-center text-sm" style="background-color: var(--dark-card); color: var(--dark-secondary-text);">
+        &copy; 2025 The Blade & Bourbon. All Rights Reserved. POWERED BY A.STYLE.
+    </footer>
+
+    <script>
+        // Theme Toggle Script (Kept functional)
+        const body = document.getElementById('body-theme');
+        const toggleButton = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function toggleTheme() {
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+            toggleButton.style.backgroundColor = body.classList.contains('dark') ? 'var(--color-primary-hover)' : 'var(--color-primary)';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                body.classList.add('light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                body.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+            toggleButton.style.backgroundColor = body.classList.contains('dark') ? 'var(--color-primary-hover)' : 'var(--color-primary)';
+
+            // Advanced Dev Touch: Observe elements for scroll-in animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-animate').forEach(element => {
+                observer.observe(element);
+                element.style.animationPlayState = 'paused'; // Pause until visibility
+            });
+        });
+    </script>
+</body>
+</html>

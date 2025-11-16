@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SasukeY7 Barbershop | אשקלון</title>
+    <style>
+        /* איפוס בסיסי וטיפוגרפיה */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* מיתוג: שחור ואפור כהה */
+        :root {
+            --primary-color: #111;
+            --secondary-color: #222;
+            --accent-color: #c39b6a; /* צבע זהב/חום עשיר למיתוג */
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px 20px; /* הגדלת ריפוד */
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            letter-spacing: 2px; /* רווח קל בין אותיות */
+            color: var(--accent-color); /* הדגשת השם בזהב */
+        }
+
+        /* ניווט */
+        nav {
+            background: var(--secondary-color);
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color); /* הדגשת מעבר עכבר בצבע מיתוג */
+        }
+
+        /* Hero Section */
+        .hero {
+            /* השארת תמונת הרקע כפי שסופקה */
+            background: url('https://ideogram.ai/assets/progressive-image/balanced/response/uDc5c9j3TgapKRUl7U65ig') no-repeat center/cover;
+            height: 450px; /* הגבהת ההירו */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(255, 255, 255);
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* הגברת הצללה לניגודיות */
+            font-size: 3.5em;
+            font-weight: 900; /* מודגש יותר */
+        }
+
+        /* כל הסקשנים */
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--accent-color); /* קו תחתון ממותג */
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* כרטיסי שירותים */
+        .services {
+            display: flex;
+            justify-content: center; /* מרכוז */
+            gap: 20px; /* רווח בין כרטיסים */
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            width: 300px; /* הגדלת רוחב קל */
+            margin: 10px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--accent-color); /* קו עליון ממותג */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* אפקט ריחוף קל */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        
+        .card p {
+            color: #555;
+            font-size: 1em;
+        }
+
+        /* סקשן יצירת קשר */
+        #contact p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* כפתור ראשי (הזמנת תור) */
+        .main-button {
+            padding: 15px 30px; 
+            background: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .main-button:hover {
+            background: #a38156; /* גוון כהה יותר */
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+        }
+
+        /* רספונסיביות למובייל */
+        @media (max-width: 768px) {
+            .hero {
+                height: 300px;
+                font-size: 2.5em;
+            }
+            .card {
+                width: 90%; /* ברוחב מלא במובייל */
+                margin: 15px auto;
+            }
+            .section {
+                padding: 40px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Royal Cut</h1>
+</header>
+
+<nav>
+    <a href="#services">שירותים</a>
+    <a href="#about">עלינו</a>
+    <a href="#contact">צור קשר</a>
+</nav>
+
+<div class="hero">
+    הסטייל שלך. החוקים שלנו.
+</div>
+
+<section id="services" class="section">
+    <h2>השירותים שלנו</h2>
+    <div class="services">
+        <div class="card">
+            <h3>תספורת קלאסית</h3>
+            <p>חיתוך מדויק לכל סוג שיער וסגנון. כולל שטיפה ועיצוב. מותאם אישית.</p>
+        </div>
+        <div class="card">
+            <h3>טיפול זקן מלא</h3>
+            <p>עיצוב וגילוח יסודי של הזקן, כולל חיתוך, עיצוב פייד ושימוש במוצרים יוקרתיים.</p>
+        </div>
+        <div class="card">
+            <h3>חבילת פרימיום</h3>
+            <p>תספורת מלאה, עיצוב זקן, ופינוק מלא הכולל מסכת פנים מרעננת.</p>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="section">
+    <h2>קצת עלינו</h2>
+    <p>אנחנו **The Royal Cut** – מספרה מודרנית ומקצועית באשקלון, המציעה תספורות ושירותי זקן ברמה הגבוהה ביותר. אנחנו מאמינים שכל לקוח הוא יצירת אמנות, ומספקים יחס אישי, אווירה נינוחה ושימוש במוצרים איכותיים בלבד.</p>
+</section>
+
+<section id="contact" class="section">
+    <h2>תצרו עימנו קשר</h2>
+    <p>📱 **טלפון:** 050-000-0000</p>
+    <p>📍 **כתובת:** איפשהו, אשקלון (מרכז העיר)</p>
+    
+    <button class="main-button"
+    onclick="location.href='http://127.0.0.1:5500/%D7%A7%D7%91%D7%99%D7%A2%D7%AA%20%D7%AA%D7%95%D7%A8%D7%99%D7%9D.html';">
+    👑 הזמינו תור עכשיו
+    </button>
+
+</section>
+
+<footer>
+    &copy; 2025 The Royal Cut | עוצב ע"י SasukeY7. כל הזכויות שמורות.
+</footer>
+
+</body>
+</html>
